@@ -30,7 +30,8 @@ async function run() {
         await client.connect();
         //   const bookCollection=client.db('Library').collection('CategoryBook')
         const categoryBookCollection= client.db('Library').collection('categoryBook')
-        const bookCollection = client.db('carDoctor').collection('addBooks')
+        const bookCollection = client.db('Library').collection('addBooks')
+        const borrowCollection = client.db('Library').collection('borrowBooks')
 
         // const bookCollection= client.db('Library').collection('addBooks')
         //   get all manual data
@@ -54,6 +55,22 @@ async function run() {
         const result= await cursor.toArray();
         res.send(result)
     })
+
+    // add borrow book information to the database
+    app.post('/borrow',async(req,res)=>{
+        const book=req.body;
+        console.log('booking',book)
+        const result=await borrowCollection.insertOne(book)
+        res.send(result)
+    })
+
+    // personal borrow list find
+    app.get('/borrow-user/:email',async(req,res)=>{
+        const email=req.params.email;
+        const cursor=borrowCollection.find({email:email})
+        const result=await cursor.toArray();
+        res.send(result)
+    }) 
 
 
 
