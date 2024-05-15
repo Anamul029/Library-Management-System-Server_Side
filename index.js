@@ -58,11 +58,12 @@ const verifyToken = async (req, res, next) => {
 
 }
 
+
+// happy coding life 
+
 async function run() {
     try {
-        // Connect the client to the server	(optional starting in v4.7)
         // await client.connect();
-        //   const bookCollection=client.db('Library').collection('CategoryBook')
         const categoryBookCollection = client.db('Library').collection('categoryBook')
         const bookCollection = client.db('Library').collection('addBooks')
         const borrowCollection = client.db('Library').collection('borrowBooks')
@@ -115,7 +116,6 @@ async function run() {
         app.get('/books/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) };
-            // console.log('update data for',id)
             const result = await bookCollection.findOne(query);
             res.send(result);
         })
