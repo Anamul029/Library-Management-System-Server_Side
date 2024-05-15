@@ -17,8 +17,7 @@ app.use(cors({
     ],
     credentials: true
 }))
-app.use(express.json())
-app.use(cookieParser())
+
 
 // database start
 
@@ -106,9 +105,6 @@ async function run() {
 
         //  get all book data
         app.get('/books', async (req, res) => {
-            // if (req.query.email !== req.user.email) {
-            //     return res.status(403).send({ message: 'forbidden access' })
-            // }
             const cursor = bookCollection.find();
             const result = await cursor.toArray();
             res.send(result)
