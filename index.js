@@ -17,7 +17,8 @@ app.use(cors({
     ],
     credentials: true
 }))
-
+app.use(express.json())
+app.use(cookieParser())
 
 // database start
 
@@ -126,8 +127,6 @@ async function run() {
             const options = { upsert: true }
             const updateBook = req.body;
             const update = {
-                // updateOne(query, {$inc: {property_name: -1}}, options),
-                // $inc: {quantity: -1},
                 $set: {
                     image: updateBook.image,
                     bookname: updateBook.bookname,
